@@ -35,14 +35,16 @@
             />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/NLogInBtn"
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_background"
-            android:text="이메일로 시작하기" />
+            android:text="이메일로 시작하기"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.hanul.team1.triplan.jiyoon.StartActivity;
+import com.hanul.team1.triplan.jiyoon.SuccessActivity;
 
 public class SplashActivity extends AppCompatActivity {
     private Intent intent;
@@ -19,13 +21,11 @@ public class SplashActivity extends AppCompatActivity {
 
         //만약 전에 로그인한 경우가 있다면 그것을 불러오고 로그인 과정 스킵할 예정.
         SharedPreferences sp = getSharedPreferences("userProfile", Activity.MODE_PRIVATE);
-        if(sp != null){
-            if(sp.getBoolean("login_pass", false)){
-                intent = new Intent(this, StartActivity.class);
-            } else {
-                intent = new Intent(this, StartActivity.class);
-            }
+        if(sp.contains("userid")){
+            Log.d(StartActivity.TAG, "전에 로그인한 유저: "+ sp.getString("nickname", "없음"));
+            intent = new Intent(this, SuccessActivity.class);
         } else {
+            Log.d(StartActivity.TAG, "전에 로그인한 유저: "+ sp.getString("nickname", "없음"));
             intent = new Intent(this, StartActivity.class);
         }
 

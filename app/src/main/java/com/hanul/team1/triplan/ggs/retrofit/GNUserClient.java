@@ -12,7 +12,19 @@ public interface GNUserClient {
 
     public static final String GNUSERURL = "http://192.168.0.110/triplan/ggs/andgnuser/";
 
-    //구글 로그인 하면 회원가입 처리
+    //일반 회원 로긴 처리
+    @POST("User/NUserLogIn")
+    Call<ResponseBody> NUserLogIn(
+            @Query("NUserInfo") byte[] NUserInfo
+    );
+
+    //일반 회원 회갑 처리
+    @POST("User/NUserSignUp")
+    Call<ResponseBody> NUserSignUp(
+            @Query("NUserInfo") byte[] NUserInfo
+    );
+
+    //구글 로그인 하면 회갑 처리
     @POST("User/GUserSignUp")
     Call<ResponseBody> GUserSignUp(
             @Query("isOk") byte[] GUserInfo

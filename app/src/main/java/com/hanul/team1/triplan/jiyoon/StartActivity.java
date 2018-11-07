@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -37,6 +38,7 @@ import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
+import com.hanul.team1.triplan.ggs.ggs_NLogInActivity;
 
 import java.util.ArrayList;
 
@@ -49,6 +51,8 @@ public class StartActivity extends AppCompatActivity {
     //선언부
     ViewPager pager;
     SessionCallback callback;
+    SharedPreferences sp;
+    Button NLogInBtn;   //일반 로그인 버튼
 
     //구글
     GoogleSignInClient mGoogleSignInClient;
@@ -56,17 +60,30 @@ public class StartActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 1001;
     String Guserid;
     String Gnickname;
-    SharedPreferences sp;
 
     //로그
-    private static final String TAG = "CKLOG";
-    private static final String SORRY = "서버가 응답하지 않습니다.\n관리자에게 문의하세요!";
+    public static final String TAG = "CKLOG";
+    public static final String SORRY = "서버가 응답하지 않습니다.\n관리자에게 문의하세요!";
 
     //onCreate 시작
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jy_activity_main);
+
+        //일반 로그인 시작
+
+        NLogInBtn = findViewById(R.id.NLogInBtn);
+        NLogInBtn.setOnClickListener(new View.OnClickListener() {   //버튼 누르면 일반 로그인 창으로
+            @Override
+            public void onClick(View v) {
+                Intent toNLogIn = new Intent(StartActivity.this, ggs_NLogInActivity.class);
+                startActivity(toNLogIn);
+            }
+        });
+
+        //일반 로그인 끝
+
 
         //구글 시작
 
@@ -78,6 +95,8 @@ public class StartActivity extends AppCompatActivity {
                         .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        //구글 로그아웃
+        mGoogleSignInClient.signOut();
 
         //로그인 버튼 찾기
         gsignInBtn = findViewById(R.id.sign_in_google_btn);
@@ -184,6 +203,11 @@ public class StartActivity extends AppCompatActivity {
         editor.putString("userid", Guserid);
         editor.putString("nickname", Gnickname);
         editor.commit();
+
+        //로그인 성공 시 이동.
+        Intent intent = new Intent(StartActivity.this, SuccessActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     //구글 로그인 유저 회갑 처리. 네트워킹 AsyncTask
@@ -213,18 +237,17 @@ public class StartActivity extends AppCompatActivity {
             switch (result != null ? Integer.parseInt(result) : 0){
                 case 1:
                     Toast.makeText(StartActivity.this, Gnickname+" 님, 회원 가입을 축하드립니다!", Toast.LENGTH_SHORT).show();
-                    saveGUserInfoToSP();
+                    saveGUserInfoToSP();    //SP저장 및 화면전환
                     break;
                 case -1:
                     Toast.makeText(StartActivity.this, "환영합니다, "+ Gnickname + " 님!", Toast.LENGTH_SHORT).show();
-                    saveGUserInfoToSP();
+                    saveGUserInfoToSP();    //SP저장 및 화면전환
                     break;
                 default:
                     Toast.makeText(StartActivity.this, SORRY, Toast.LENGTH_SHORT).show();
                     ActivityCompat.finishAffinity(StartActivity.this);//앱 종료
                     break;
             }
-
         }
     }//AGUserSignUp
 
@@ -280,9 +303,7 @@ public class StartActivity extends AppCompatActivity {
             //구글 로그인 후 처리
             loggedGUserSave(account);
 
-
         } catch (ApiException e) {
-            Log.e(TAG, "구글 로그인 실패: "+e.getLocalizedMessage());
             Log.w(TAG, "구글 로그인 실패 원인 코드: "+e.getStatusCode());
             //코드내용: https://developers.google.com/android/reference/com/google/android/gms/auth/api/signin/GoogleSignInStatusCodes
 
@@ -360,16 +381,26 @@ public class StartActivity extends AppCompatActivity {
                     //로그인에 성공하면 로그인한 사용자의 일련번호, 닉네임, 이미지url등을 리턴합니다.
                     //사용자 ID는 보안상의 문제로 제공하지 않고 일련번호는 제공합니다.
 
-                    final String uuid = userProfile.getUUID();
+                    final String uuid = String.valueOf(userProfile.getId());
                     final String nickname = userProfile.getNickname();
 
-                    Log.e(TAG , uuid + "");
-                    Log.e(TAG , nickname + "");
+                    Log.e(TAG , "userid로 들어갈 값: " + uuid);
+                    Log.e(TAG , "nickname로 들어갈 값: " + nickname);
 
                     //DTO > JSON > byte[]
                     final byte[] bytes = DTOtoJSON(uuid, nickname);
                     //
                     kakaoLogin(bytes);
+
+                    Toast.makeText(StartActivity.this, "안녕하세요, " + nickname + " 님!", Toast.LENGTH_SHORT).show();
+
+                    //로그인 성공했으면 SP에 값 저장.
+                    sp = getSharedPreferences("userProfile", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.clear();                             //전에 로그인한 유저가 있으면 삭제.
+                    editor.putString("userid", uuid);
+                    editor.putString("nickname", nickname);
+                    editor.commit();
 
                     //로그인 성공 시 이동.
                     Intent intent = new Intent(StartActivity.this, SuccessActivity.class);
@@ -379,10 +410,12 @@ public class StartActivity extends AppCompatActivity {
             });
 
         }
+
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
             // 세션 연결이 실패했을때
             // 어쩔때 실패되는지는 테스트를 안해보았음 ㅜㅜ
+            //로그아웃 했을 때도 뜸.
         }
     }
 
@@ -433,23 +466,6 @@ public class StartActivity extends AppCompatActivity {
             }
             return null;
         }//
-
-        @Override
-        protected void onPostExecute(final String result) {
-            Log.d(TAG, result);
-
-            switch (result != null? Integer.parseInt(result) : 0){
-                case 1 :
-                    Toast.makeText(StartActivity.this, "환영합니다.", Toast.LENGTH_SHORT).show();
-                    break;
-                case -1:
-                    Toast.makeText(StartActivity.this, "안녕하세요.", Toast.LENGTH_SHORT).show();
-                    break;
-                default:
-                    Toast.makeText(StartActivity.this, SORRY, Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }//Post
     }
 
     //카톡 로그인 끝

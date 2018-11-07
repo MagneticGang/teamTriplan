@@ -47,4 +47,7 @@ dependencies {
 
     //쓸데없지만 지우면 경고 뜸 -_-
     implementation 'com.google.firebase:firebase-core:16.0.0'
+
+    //유효성 검사를 위한 saripaar
+    implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
 }

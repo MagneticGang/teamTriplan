@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/superLinear"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <EditText
+        android:id="@+id/NSEmailET"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:hint="이메일"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/NSEmailCFET"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="이메일 확인"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/NSPwdET"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/NSPwdCFET"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="비밀번호 확인"
+        android:inputType="textPassword"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/NSNicknameET"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="별명"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/NSSubmitBtn"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_background"
+        android:text="회원 가입"
+        android:textSize="16sp" />
+
+    <CheckBox
+        android:id="@+id/NSCKB"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="이용약관 및 \n개인정보 보호정책에 동의합니다" />
+
+</LinearLayout>

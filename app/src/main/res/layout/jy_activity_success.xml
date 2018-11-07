@@ -3,14 +3,28 @@
     android:id="@+id/successLinear"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/getLoggedUserBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="로그인한 놈 정보" />
 
     <TextView
+        android:id="@+id/infoTV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Login Success"
-        android:textSize="30dp"/>
+        android:layout_height="49dp"
+        android:text="로그인한 놈"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="로그아웃" />
 
 </LinearLayout>
 

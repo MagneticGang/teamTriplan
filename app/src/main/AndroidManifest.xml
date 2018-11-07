@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hanul.team1.triplan">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".jiyoon.GlobalApplication"
@@ -20,13 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--카카오-->
+        <!-- 카카오 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-        <activity android:name=".jiyoon.SuccessActivity"></activity>
-        <activity android:name=".jiyoon.StartActivity"/>
-<!-- 카카오 -->
+
+        <activity android:name=".jiyoon.SuccessActivity" />
+        <activity android:name=".jiyoon.StartActivity" />
+        <!-- 카카오 -->
+        <activity android:name=".ggs.ggs_NLogInActivity" />
+        <activity android:name=".ggs.ggs_NSignUpActivity" />
     </application>
 
 </manifest>
