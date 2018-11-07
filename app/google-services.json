@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1039848715741",
+    "firebase_url": "https://startactivity-7d546.firebaseio.com",
+    "project_id": "startactivity-7d546",
+    "storage_bucket": "startactivity-7d546.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039848715741:android:ad8fa9ab443a97cc",
+        "android_client_info": {
+          "package_name": "com.hanul.team1.triplan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039848715741-s7fs781q51tadl22pi16eo8cjf6boulf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hanul.team1.triplan",
+            "certificate_hash": "e031d5d5258ae3c9f0ec2a1d620faf8f8ea384b4"
+          }
+        },
+        {
+          "client_id": "1039848715741-lrpb28mq92bdk7sqs7v4bb53vv2jl6o5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpscbceSJq9jlBF3n8BU2baDVu84_40Ek"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039848715741-lrpb28mq92bdk7sqs7v4bb53vv2jl6o5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

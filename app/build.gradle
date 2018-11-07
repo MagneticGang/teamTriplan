@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 27
@@ -27,6 +28,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
 
+    //파베-구글 로그인
+    implementation 'com.google.firebase:firebase-auth:16.0.1'
+    implementation 'com.google.android.gms:play-services-auth:15.0.1' //파베-구글 로그인을 위한 구글 플레이 서비스
+
+    //Retrofit을 위한 retrofit, converter-gson
     implementation group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.3.0'
     implementation group: 'com.squareup.retrofit2', name: 'converter-gson', version: '2.3.0'
 
@@ -38,4 +44,7 @@ dependencies {
 
     //Snackbar를 위한 design
     implementation 'com.android.support:design:27.1.1'
+
+    //쓸데없지만 지우면 경고 뜸 -_-
+    implementation 'com.google.firebase:firebase-core:16.0.0'
 }
