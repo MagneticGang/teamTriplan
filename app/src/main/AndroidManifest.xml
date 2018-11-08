@@ -24,11 +24,21 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDGOVgSZuqIfEJJnu96TsMSHd8UZP-p9uM" />
+
         <activity android:name=".jiyoon.SuccessActivity" />
         <activity android:name=".jiyoon.StartActivity" />
         <!-- 카카오 -->
         <activity android:name=".ggs.ggs_NLogInActivity" />
         <activity android:name=".ggs.ggs_NSignUpActivity" />
+
+        <activity android:name=".ysh.DayListActivity"/>
+        <activity android:name=".ysh.SiteListActivity"/>
+        <activity android:name=".ysh.MapActivity"/>
+        <activity android:name=".ysh.MemoActivity"
+            android:theme="@style/popupTheme" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

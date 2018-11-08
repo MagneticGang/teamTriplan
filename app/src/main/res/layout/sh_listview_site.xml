@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_margin="5dp"
+    android:orientation="horizontal"
+    android:weightSum="5">
+
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
+
+        <ImageView
+            android:id="@+id/siteImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvSeq"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:background="@android:color/holo_blue_dark"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/tvDistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2.28km"
+                android:background="#55000000"
+                android:textAlignment="center"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                android:textColor="#fff"
+                android:layout_marginHorizontal="5dp"/>
+
+        </RelativeLayout>
+    </FrameLayout>
+
+
+    <RelativeLayout
+        android:layout_marginLeft="5dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3">
+
+        <TextView
+            android:id="@+id/tvSiteName"
+            android:text="title"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"/>
+
+        <TextView
+            android:id="@+id/tvSiteType"
+            android:text="siteType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_below="@id/tvSiteName"
+            android:layout_marginTop="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp">
+
+            <Button
+                android:id="@+id/btnRoadSearch"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_bg_empty"
+                android:text="길찾기"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="15dp"/>
+
+            <Button
+                android:id="@+id/btnMemo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_empty"
+                android:text="메모"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:layout_marginRight="15dp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

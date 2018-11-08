@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/siteTop"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/holo_blue_dark">
+
+        <TextView
+            android:id="@+id/siteHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DAY"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:layout_centerVertical="true"
+            />
+        <ImageView
+            android:id="@+id/btnSiteBack"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back_arrow"
+            android:layout_marginLeft="5dp"/>
+        <ImageView
+            android:id="@+id/btnMap"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/map_icon"
+            android:layout_marginRight="5dp"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/siteListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/siteTop">
+    </ListView>
+
+</RelativeLayout>

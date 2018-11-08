@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface GNUserClient {
 
-    public static final String GNUSERURL = "http://192.168.0.110/triplan/ggs/andgnuser/";
+    public static final String GNUSERURL = "http://192.168.0.104/triplan/ggs/andgnuser/";
 
     //일반 회원 로긴 처리
     @POST("User/NUserLogIn")

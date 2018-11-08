@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/mapTop"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/holo_blue_dark">
+
+        <TextView
+            android:id="@+id/mapHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="지도"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:layout_centerVertical="true"
+            />
+        <ImageView
+            android:id="@+id/btnMapBack"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back_arrow"
+            android:layout_marginLeft="5dp"/>
+    </RelativeLayout>
+
+    <fragment
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        tools:context=".MapActivity"
+        android:layout_below="@+id/mapTop"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+</RelativeLayout>
