@@ -206,8 +206,8 @@ public class StartActivity extends AppCompatActivity {
 
         //로그인 성공 시 이동.
         Intent intent = new Intent(StartActivity.this, SuccessActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        finish();
     }
 
     //구글 로그인 유저 회갑 처리. 네트워킹 AsyncTask
@@ -404,8 +404,8 @@ public class StartActivity extends AppCompatActivity {
 
                     //로그인 성공 시 이동.
                     Intent intent = new Intent(StartActivity.this, SuccessActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);//이동 전에 켜져있던 activity 클리어.
                     startActivity(intent);
-                    finish();
                 }
             });
 

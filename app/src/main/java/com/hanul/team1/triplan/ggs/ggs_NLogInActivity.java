@@ -71,8 +71,8 @@ public class ggs_NLogInActivity extends AppCompatActivity {
 
         //로그인 성공 시 이동.
         Intent intent = new Intent(getApplicationContext(), SuccessActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        finish();
     }//saveToSP
 
     //일반 로긴 ASYNCTASK
