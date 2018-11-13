@@ -307,9 +307,8 @@ public class StartActivity extends AppCompatActivity {
             Log.w(TAG, "구글 로그인 실패 원인 코드: "+e.getStatusCode());
             //코드내용: https://developers.google.com/android/reference/com/google/android/gms/auth/api/signin/GoogleSignInStatusCodes
 
-            //모든 Activity 종료
             Toast.makeText(this, SORRY, Toast.LENGTH_LONG).show();
-            ActivityCompat.finishAffinity(StartActivity.this);
+            //사용자가 구글 로그인창을 닫는 경우도 포함됨. 강제종료하면 안됀다!
         }
     }
 

@@ -18,7 +18,7 @@
         <TextView
             android:id="@+id/TVnick"
             android:layout_width="182dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:text="안녕"
@@ -97,7 +97,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/button_background"
                     android:gravity="center"
-                    android:text="비밀번호\n재설정"
+                    android:text="내정보\n관리"
                     android:textColor="@android:color/white"
                     android:textSize="16dp"
                     android:typeface="monospace" />

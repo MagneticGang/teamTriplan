@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/SUPERLINEAR"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="7">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/TVnick"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="별 명"
+                android:textColor="@color/com_kakao_button_text_press"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/TVpwd"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="비밀번호"
+                android:textSize="20dp"
+                android:textColor="@color/com_kakao_button_text_press"/>
+
+        </LinearLayout>
+        
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="5">
+            <EditText
+                android:id="@+id/ETnickreset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"/>
+
+            <EditText
+                android:id="@+id/ETpwdreset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@android:color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/BTNcommit"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_background"
+            android:text="변경하기"
+            android:textColor="@android:color/white"
+            android:textSize="17dp" />
+
+        <Button
+            android:id="@+id/BTNbackmyp"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_background_cancel"
+            android:text="돌아가기"
+            android:textSize="17dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@android:color/white"/>
+
+
+</LinearLayout>

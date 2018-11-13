@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hanul.team1.triplan">
 
-    <!--권한-->
+    <!-- 권한 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -28,22 +28,31 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDGOVgSZuqIfEJJnu96TsMSHd8UZP-p9uM" />
+
         <activity android:name=".jiyoon.SuccessActivity" />
         <activity android:name=".jiyoon.StartActivity" />
-        <!-- jiyoon 끝-->
+        <!-- jiyoon 끝 -->
 
-        <!--ggs 시작-->
+
+        <!-- ggs 시작 -->
         <activity android:name=".ggs.ggs_NLogInActivity" />
         <activity android:name=".ggs.ggs_NSignUpActivity" />
-        <!--ggs 끝-->
+        <activity
+            android:name=".ggs.ggs_InfoReset"
+            android:theme="@style/resetPwdTheme"
+            android:screenOrientation="portrait"/><!--세로로 고정된 커스텀 액티비티-->
+        <!-- ggs 끝 -->
 
-        <!--ysh 시작-->
-        <activity android:name=".ysh.DayListActivity"/>
-        <activity android:name=".ysh.SiteListActivity"/>
-        <activity android:name=".ysh.MapActivity"/>
-        <activity android:name=".ysh.MemoActivity"
-            android:theme="@style/popupTheme" android:screenOrientation="portrait"/>
-        <!--ysh 끝-->
+
+        <!-- ysh 시작 -->
+        <activity android:name=".ysh.DayListActivity" />
+        <activity android:name=".ysh.SiteListActivity" />
+        <activity android:name=".ysh.MapActivity" />
+        <activity
+            android:name=".ysh.MemoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/popupTheme" />
+        <!-- ysh 끝 -->
 
     </application>
 

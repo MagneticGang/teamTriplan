@@ -12,6 +12,18 @@ public interface GNUserClient {
 
     public static final String GNUSERURL = "http://192.168.0.110/triplan/ggs/andgnuser/";
 
+    //회원 탈퇴 요청
+    @POST("User/UserSignOut")
+    Call<ResponseBody> UserSignOut(
+            @Query("requestedID") String userid
+    );
+
+    //회원 정보 수정 요청
+    @POST("User/UserUpdate")
+    Call<ResponseBody> UserUpdate(
+            @Query("UserInfo") byte[] UserInfo
+    );
+
     //일반 회원 로긴 처리
     @POST("User/NUserLogIn")
     Call<ResponseBody> NUserLogIn(

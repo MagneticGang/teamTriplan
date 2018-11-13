@@ -17,4 +17,16 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!--비번 재설정 커스텀 팝업 엑티비티-->
+    <style name="resetPwdTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!--타이틀 제거-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
 </resources>

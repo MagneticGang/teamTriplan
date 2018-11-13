@@ -133,7 +133,6 @@ public class ggs_NSignUpActivity extends AppCompatActivity implements Validator.
 
             switch (Integer.parseInt(s)){
                 case 1://1이면 가입 성공
-                    String id = NSEmailCFET.getText().toString();
                     String name = NSNicknameET.getText().toString();
                     Toast.makeText(ggs_NSignUpActivity.this, "회원가입을 축하드립니다, "+ name + " 님!", Toast.LENGTH_SHORT).show();
                     //SP에 저장 후 다음 화면으로
@@ -146,9 +145,6 @@ public class ggs_NSignUpActivity extends AppCompatActivity implements Validator.
                     Toast.makeText(ggs_NSignUpActivity.this, "서버 응답이 없습니다! 관리자에게 문의하세요!", Toast.LENGTH_SHORT).show();
                     break;
             }
-
-
-
         }
     }//AsyncTask
 
