@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#0000ff">
+    android:orientation="vertical">
 
-    <Button
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="기능3 화면입니다."
-        android:textAlignment="center"/>
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        tools:text="기능3화면입니다." />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="번역기" />
+
+
 
 </LinearLayout>

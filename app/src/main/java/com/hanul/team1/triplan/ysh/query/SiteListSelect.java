@@ -40,7 +40,7 @@ public class SiteListSelect extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
-        String requestURL = "http://192.168.0.110/triplan/android/sitelist?dayid="+dayDto.getDayid()+"&planid="+dayDto.getPlanid();
+        String requestURL = "http://192.168.0.27/triplan/android/sitelist?dayid="+dayDto.getDayid()+"&planid="+dayDto.getPlanid();
         StringBuilder sb = new StringBuilder();
         try {
             URL url = new URL(requestURL);

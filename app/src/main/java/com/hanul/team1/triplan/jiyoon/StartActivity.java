@@ -1,6 +1,7 @@
 package com.hanul.team1.triplan.jiyoon;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -28,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.hanul.team1.triplan.R;
 import com.hanul.team1.triplan.ggs.gnuserdto.GNUserDTO;
 import com.hanul.team1.triplan.ggs.retrofit.GNUserClient;
+import com.hanul.team1.triplan.ysh.Fn3Fragment;
 import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -70,6 +72,10 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jy_activity_main);
+
+
+
+
 
         //일반 로그인 시작
 
@@ -468,7 +474,5 @@ public class StartActivity extends AppCompatActivity {
     }
 
     //카톡 로그인 끝
-
-
 
 }

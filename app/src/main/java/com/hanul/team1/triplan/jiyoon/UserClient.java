@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface UserClient {
 
-    public static final String TESTURL ="http://192.168.0.110/triplan/user/";
+    public static final String TESTURL ="http://192.168.0.27/triplan/user/";
     @POST("insert")
     Call<ResponseBody> sendUuid(
             @Query("isOk") byte[] uuid

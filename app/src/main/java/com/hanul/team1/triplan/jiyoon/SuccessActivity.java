@@ -1,13 +1,17 @@
 package com.hanul.team1.triplan.jiyoon;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.hanul.team1.triplan.R;
+import com.hanul.team1.triplan.ysh.Fn3Fragment;
 import com.hanul.team1.triplan.ysh.MainPageAdapter;
 
 public class SuccessActivity extends AppCompatActivity {
@@ -19,6 +23,10 @@ public class SuccessActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sh_activity_main);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
 
         SharedPreferences sp = getSharedPreferences("userProfile", Activity.MODE_PRIVATE);
 
@@ -41,4 +49,5 @@ public class SuccessActivity extends AppCompatActivity {
         });
 
     }
+
 }

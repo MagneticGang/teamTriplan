@@ -31,6 +31,11 @@
 
         <activity android:name=".jiyoon.SuccessActivity" />
         <activity android:name=".jiyoon.StartActivity" />
+
+        <activity
+            android:name=".jiyoon.PapagoActivity"
+            android:theme="@style/PapagoTheme"
+            android:screenOrientation="portrait"/>
         <!-- jiyoon 끝 -->
 
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="300dp"
+        android:layout_height="500dp"
+        android:orientation="vertical"
+        android:weightSum="6">
+
+        <EditText
+            android:id="@+id/translationText"
+            android:layout_width="288dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:hint="번역할 문장을 입력하세요."
+            android:scrollbarStyle="insideInset"
+            android:gravity="center" />
+
+    <Button
+        android:id="@+id/translationBtn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="한-영 번역하기!" />
+
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:gravity="center_vertical|center"
+        android:text="번역결과"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:typeface="monospace" />
+
+    <Button
+        android:id="@+id/finishBtn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="뒤로가기" />
+
+
+    </LinearLayout>
+
