@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="270dp"
-        android:layout_height="111dp"
+        android:layout_height="203dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -19,12 +19,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.186"
+        app:layout_constraintVertical_bias="0.137"
         app:srcCompat="@drawable/triplan_logo" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="267dp"
+        android:layout_width="317dp"
         android:layout_height="88dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -32,17 +32,17 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/poorstory"
+        android:fontFamily="@font/dohyun"
         android:text="내 손 안의 여행 지도\n 트립플랜"
         android:textAlignment="center"
         android:textColor="#00060A"
-        android:textSize="30sp"
+        android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.479" />
+        app:layout_constraintVertical_bias="0.498" />
 
 
 </android.support.constraint.ConstraintLayout>

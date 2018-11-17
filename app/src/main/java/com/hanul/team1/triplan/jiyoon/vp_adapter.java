@@ -1,4 +1,4 @@
-package com.example.user.viewpager;
+package com.hanul.team1.triplan.jiyoon;
 
 import android.content.Context;
 import android.os.Parcelable;

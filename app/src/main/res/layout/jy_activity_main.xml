@@ -5,13 +5,45 @@
     android:layout_height="match_parent"
     android:background="@drawable/backimage">
 
-
+<LinearLayout
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/guidePages"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
     </android.support.v4.view.ViewPager>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="515dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/viewGroup"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
 
 
     <LinearLayout

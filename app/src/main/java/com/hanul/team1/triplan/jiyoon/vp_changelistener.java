@@ -1,7 +1,9 @@
-package com.example.user.viewpager;
+package com.hanul.team1.triplan.jiyoon;
 
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
+
+import com.hanul.team1.triplan.R;
 
 public class vp_changelistener implements ViewPager.OnPageChangeListener {
 

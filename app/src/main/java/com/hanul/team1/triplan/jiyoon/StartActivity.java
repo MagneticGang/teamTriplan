@@ -6,15 +6,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -43,6 +48,8 @@ import com.kakao.util.helper.log.Logger;
 import com.hanul.team1.triplan.ggs.ggs_NLogInActivity;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -51,10 +58,27 @@ import retrofit2.Response;
 public class StartActivity extends AppCompatActivity {
 
     //선언부
-    ViewPager pager;
+    /*ViewPager pager;*/
+
     SessionCallback callback;
     SharedPreferences sp;
     Button NLogInBtn;   //일반 로그인 버튼
+
+    private ViewPager viewPager;
+    private ArrayList<View> pageViews;
+    private ImageView imageView;
+    private ImageView[] imageViews;
+    private ViewGroup viewPics;
+    private ViewGroup viewPoints;
+
+    Timer timer;
+
+
+    public void vp_auto_scroll(int seconds) {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new vp_auto(), 0, seconds * 1000);
+    }
+
 
     //구글
     GoogleSignInClient mGoogleSignInClient;
@@ -71,10 +95,40 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.jy_activity_main);
 
+        //뷰페이저 넘어가는 시간 3초
+        vp_auto_scroll(5);
 
+        LayoutInflater inflater = getLayoutInflater();
+        pageViews = new ArrayList<View>();
+        pageViews.add(inflater.inflate(R.layout.jy_fragment1, null));
+        pageViews.add(inflater.inflate(R.layout.jy_fragment2, null));
+        pageViews.add(inflater.inflate(R.layout.jy_fragment3, null));
 
+        imageViews = new ImageView[pageViews.size()];
+        viewPics = (ViewGroup) inflater.inflate(R.layout.jy_activity_main, null);
+
+        viewPoints = (ViewGroup) viewPics.findViewById(R.id.viewGroup);
+        viewPager = (ViewPager) viewPics.findViewById(R.id.guidePages);
+
+        for (int i = 0; i < pageViews.size(); i++) {
+            imageView = new ImageView(StartActivity.this);
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(20, 20));
+            imageView.setPadding(20, 0, 20, 0);
+            imageViews[i] = imageView;
+
+            if (i == 0) {
+                imageViews[i].setBackgroundResource(R.mipmap.circle_selection);
+            } else {
+                imageViews[i].setBackgroundResource(R.mipmap.circle);
+            }
+
+            viewPoints.addView(imageViews[i]);
+        }
+        setContentView(viewPics);
+
+        viewPager.setAdapter(new vp_adapter(pageViews, this));
+        viewPager.setOnPageChangeListener((ViewPager.OnPageChangeListener) new vp_changelistener(imageViews));
 
 
         //일반 로그인 시작
@@ -119,7 +173,6 @@ public class StartActivity extends AppCompatActivity {
 
         //구글 끝
 
-
         //카톡 시작
 
         /**카카오톡 로그아웃 요청**/
@@ -130,33 +183,46 @@ public class StartActivity extends AppCompatActivity {
             }
         });//카톡 로그아웃 요청 끝
 
-        //카톡 끝
-
-        //이미지 슬라이드 시작
-        pager = findViewById(R.id.pager);
-        pager.setOffscreenPageLimit(3);
-
-        MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager());
-
-        Fragment1 fragment1 = new Fragment1();
-        adapter.addItem(fragment1);
-
-        Fragment2 fragment2 = new Fragment2();
-        adapter.addItem(fragment2);
-
-        Fragment3 fragment3 = new Fragment3();
-        adapter.addItem(fragment3);
-
-        pager.setAdapter(adapter);
-
-
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
-        //이미지 슬라이드 끝
+        //카톡 끝
 
 
-    }
-    //onCreate 끝
+    }//onCreate 끝
+
+    //뷰페이저 자동 넘김 클래스
+    class vp_auto extends TimerTask {
+
+        int vp_help = 0;
+
+        @Override
+        public void run() {
+
+            runOnUiThread(new Runnable() {
+                public void run() {
+
+                    int vp_page = viewPager.getCurrentItem();
+
+                    if (vp_page == 0 && vp_help == 1) {
+                        viewPager.setCurrentItem(1);
+                    }
+
+                    if (vp_help == 0) {
+                        viewPager.setCurrentItem(0);
+                        vp_help = 1;
+                    }
+
+                    if (vp_page == 1) {
+                        viewPager.setCurrentItem(2);
+                    }
+
+                    if (vp_page == 2) {
+                        viewPager.setCurrentItem(0);
+                    }
+                }
+            });
+        }
+    }//vp_auto
 
     //onActivityResult()
     //Intent 결과 처리
