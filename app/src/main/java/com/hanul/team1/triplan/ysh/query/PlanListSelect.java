@@ -46,7 +46,7 @@ public class PlanListSelect extends AsyncTask<Void, Void, Void> {
         publishProgress();
         dtos.clear();
 
-        String requestUrl = "http://192.168.0.27/triplan/android/planlist?userid="+userid;
+        String requestUrl = "http://192.168.0.110/triplan/android/planlist?userid="+userid;
         String inputLine;
         StringBuilder resultSet = new StringBuilder();
 

@@ -8,9 +8,9 @@
     <application
         android:name=".jiyoon.GlobalApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon_triplan"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/icon_triplan"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SplashActivity">
@@ -31,11 +31,10 @@
 
         <activity android:name=".jiyoon.SuccessActivity" />
         <activity android:name=".jiyoon.StartActivity" />
-
         <activity
             android:name=".jiyoon.PapagoActivity"
-            android:theme="@style/PapagoTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/PapagoTheme" />
         <!-- jiyoon 끝 -->
 
 
@@ -44,8 +43,9 @@
         <activity android:name=".ggs.ggs_NSignUpActivity" />
         <activity
             android:name=".ggs.ggs_InfoReset"
-            android:theme="@style/resetPwdTheme"
-            android:screenOrientation="portrait"/><!--세로로 고정된 커스텀 액티비티-->
+            android:screenOrientation="portrait"
+            android:theme="@style/resetPwdTheme" /> <!-- 세로로 고정된 커스텀 액티비티 -->
+        <activity android:name=".ggs.CompassActivity"></activity><!--나침반-->
         <!-- ggs 끝 -->
 
 

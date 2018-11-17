@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface GNUserClient {
 
-    public static final String GNUSERURL = "http://192.168.0.27/triplan/ggs/andgnuser/";
+    public static final String GNUSERURL = "http://192.168.0.110/triplan/ggs/andgnuser/";
 
     //회원 탈퇴 요청
     @POST("User/UserSignOut")
