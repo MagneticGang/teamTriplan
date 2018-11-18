@@ -26,7 +26,7 @@ public class MemoUpdate extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         modify_content = modify_content.replace("\n", "<br/>");
-        String requestURL = "http://192.168.0.110/triplan/android/memoupdate?siteid="+siteid+"&content="+modify_content;
+        String requestURL = "http://115.23.6.9/triplan/android/memoupdate?siteid="+siteid+"&content="+modify_content;
         StringBuilder sb = new StringBuilder();
         String inputLine;
 

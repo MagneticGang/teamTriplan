@@ -40,7 +40,7 @@ public class DayListSelect extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
         dtos.clear();
 
-        String requestUrl = "http:192.168.0.110/triplan/android/daylist?planid="+planid;
+        String requestUrl = "http://115.23.6.9/triplan/android/daylist?planid="+planid;
         String inputLine;
         StringBuilder resultSet = new StringBuilder();
 

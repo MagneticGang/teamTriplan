@@ -24,7 +24,7 @@ public class MemoSelect extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
 
-        String requestURL = "http://192.168.0.110/triplan/android/memoselect?siteid="+siteid;
+        String requestURL = "http://115.23.6.9/triplan/android/memoselect?siteid="+siteid;
         StringBuilder sb = new StringBuilder();
         String inputLine;
 
