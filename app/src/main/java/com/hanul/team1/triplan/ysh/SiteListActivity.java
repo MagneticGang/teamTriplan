@@ -9,13 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hanul.team1.triplan.R;
 import com.hanul.team1.triplan.ysh.dtos.DayListDTO;
 import com.hanul.team1.triplan.ysh.dtos.SiteListDTO;
-import com.hanul.team1.triplan.ysh.listview.SiteListAdapter;
 import com.hanul.team1.triplan.ysh.listview.SiteListRecyclerAdapter;
 import com.hanul.team1.triplan.ysh.retrofit.PlanInterface;
 import com.hanul.team1.triplan.ysh.retrofit.RetrofitClient;
@@ -63,7 +61,7 @@ public class SiteListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<SiteListDTO>> call, Response<List<SiteListDTO>> response) {
                 dtos= (ArrayList<SiteListDTO>) response.body();
-                if(dtos==null){
+                if(dtos.size() == 0){
                     siteTvNull.setVisibility(View.VISIBLE);
                 } else {
                     siteTvNull.setVisibility(View.GONE);

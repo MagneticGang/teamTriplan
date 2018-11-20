@@ -62,7 +62,7 @@ public class PlanListFragment extends Fragment {
             @Override
             public void onResponse(Call<List<PlanListDTO>> call, Response<List<PlanListDTO>> response) {
                 dtos = (ArrayList<PlanListDTO>) response.body();
-                if(dtos == null){
+                if(dtos.size() == 0){
                     planTvNull.setVisibility(View.VISIBLE);
                 } else {
                     planTvNull.setVisibility(View.GONE);

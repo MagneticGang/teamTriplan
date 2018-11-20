@@ -67,7 +67,7 @@ public class DayListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<DayListDTO>> call, Response<List<DayListDTO>> response) {
                 dtos = (ArrayList<DayListDTO>) response.body();
-                if(dtos != null){
+                if(dtos.size() > 0){
                     dayTvNull.setVisibility(View.GONE);
                     mAdapter = new DayListRecyclerAdapter(dtos, getApplicationContext());
                     dayRV.setAdapter(mAdapter);
