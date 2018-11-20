@@ -1,8 +1,120 @@
 package com.hanul.team1.triplan.ysh.dtos;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class SiteListDTO implements Serializable {
+
+    @SerializedName("placeid")
+    @Expose
+    public String placeid;
+    @SerializedName("siteName")
+    @Expose
+    public String siteName;
+    @SerializedName("siteType")
+    @Expose
+    public String siteType;
+    @SerializedName("seq")
+    @Expose
+    public Integer seq;
+    @SerializedName("planid")
+    @Expose
+    public Integer planid;
+    @SerializedName("dayid")
+    @Expose
+    public Integer dayid;
+    @SerializedName("siteid")
+    @Expose
+    public Integer siteid;
+    @SerializedName("lat")
+    @Expose
+    public Double lat;
+    @SerializedName("lng")
+    @Expose
+    public Double lng;
+
+}
+
+
+
+
+
+/*
+    protected SiteListDTO(Parcel in) {
+        placeid = in.readString();
+        siteName = in.readString();
+        siteType = in.readString();
+        if (in.readByte() == 0) {
+            seq = null;
+        } else {
+            seq = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            planid = null;
+        } else {
+            planid = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            dayid = null;
+        } else {
+            dayid = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            siteid = null;
+        } else {
+            siteid = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            lat = null;
+        } else {
+            lat = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            lng = null;
+        } else {
+            lng = in.readDouble();
+        }
+    }
+
+    public static final Creator<SiteListDTO> CREATOR = new Creator<SiteListDTO>() {
+        @Override
+        public SiteListDTO createFromParcel(Parcel in) {
+            return new SiteListDTO(in);
+        }
+
+        @Override
+        public SiteListDTO[] newArray(int size) {
+            return new SiteListDTO[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(placeid);
+        dest.writeString(siteName);
+        dest.writeString(siteType);
+        dest.writeInt(seq);
+        dest.writeInt(planid);
+        dest.writeInt(dayid);
+        dest.writeInt(siteid);
+        dest.writeDouble(lat);
+        dest.writeDouble(lng);
+    }*/
+
+
+/*
+package com.hanul.team1.triplan.ysh.dtos;
+
+import android.os.Parcelable;
+
+public class SiteListDTO implements Parcelable {
     private String placeid, siteName, siteType;
     private int seq, planid, dayid, siteid;
     private double lat, lng;
@@ -93,4 +205,7 @@ public class SiteListDTO implements Serializable {
     public void setSeq(int seq) {
         this.seq = seq;
     }
-}
+
+
+
+}*/

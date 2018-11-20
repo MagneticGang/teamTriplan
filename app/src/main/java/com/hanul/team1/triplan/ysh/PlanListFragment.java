@@ -18,9 +18,15 @@ import android.widget.TextView;
 import com.hanul.team1.triplan.R;
 import com.hanul.team1.triplan.ysh.dtos.PlanListDTO;
 import com.hanul.team1.triplan.ysh.listview.PlanListAdapter;
-import com.hanul.team1.triplan.ysh.query.PlanListSelect;
+import com.hanul.team1.triplan.ysh.retrofit.PlanInterface;
+import com.hanul.team1.triplan.ysh.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PlanListFragment extends Fragment {
 
@@ -29,7 +35,6 @@ public class PlanListFragment extends Fragment {
 
     PlanListAdapter adapter;
     ArrayList<PlanListDTO> dtos;
-    PlanListSelect planListSelect;
     ProgressDialog dialog;
 
 
@@ -42,27 +47,37 @@ public class PlanListFragment extends Fragment {
         listView = rootView.findViewById(R.id.planListView);
         planTvNull = rootView.findViewById(R.id.planTvNull);
 
-        dtos = new ArrayList<>();
-        adapter = new PlanListAdapter(dtos,getActivity());
-        listView.setAdapter(adapter);
-
-        SharedPreferences sp = getActivity().getSharedPreferences("userProfile", Activity.MODE_PRIVATE);
-        String userid = sp.getString("userid","");
-
         dialog = new ProgressDialog(getActivity());
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage("데이터 로딩 중입니다.");
         dialog.show();
 
-        planListSelect = new PlanListSelect(dtos,adapter,dialog,userid,planTvNull);
-        planListSelect.execute();
+        SharedPreferences sp = getActivity().getSharedPreferences("userProfile", Activity.MODE_PRIVATE);
+        String userid = sp.getString("userid","");
+
+        Call<List<PlanListDTO>> call = RetrofitClient.getRetrofit().create(PlanInterface.class).getPlanList(userid);
+        call.enqueue(new Callback<List<PlanListDTO>>() {
+            @Override
+            public void onResponse(Call<List<PlanListDTO>> call, Response<List<PlanListDTO>> response) {
+                dtos = (ArrayList<PlanListDTO>) response.body();
+                adapter = new PlanListAdapter(dtos,getActivity());
+                listView.setAdapter(adapter);
+
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<List<PlanListDTO>> call, Throwable t) {
+                call.cancel();
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), DayListActivity.class);
-                PlanListDTO dto = (PlanListDTO) adapter.getItem(position);
-                intent.putExtra("PlanListDTO", dto);
+                PlanListDTO pvo = (PlanListDTO) adapter.getItem(position);
+                intent.putExtra("pvo",  pvo);
                 startActivity(intent);
             }
         });

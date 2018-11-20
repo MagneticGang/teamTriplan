@@ -53,21 +53,29 @@ public class SiteListAdapter extends BaseAdapter {
         }
 
         SiteListDTO dto = dtos.get(position);
-        siteListView.setSiteImg(dto.getPlaceid(), context);
-        siteListView.setTvSeq(dto.getSeq());
+        //siteListView.setSiteImg(dto.getPlaceid(), context);
+        //siteListView.setTvSeq(dto.getSeq());
+        siteListView.setSiteImg(dto.placeid, context);
+        siteListView.setTvSeq(dto.seq);
 
         GoogleMethods google = new GoogleMethods(context);
-        siteListView.setTvSiteName( dto.getSiteName() );
-        siteListView.setTvSiteType( dto.getSiteType() );
+        //siteListView.setTvSiteName( dto.getSiteName() );
+//        siteListView.setTvSiteType( dto.getSiteType() );
+        siteListView.setTvSiteName( dto.siteName );
+        siteListView.setTvSiteType( dto.siteType );
         if(position > 0){
             SiteListDTO dto2 = dtos.get(position-1);
-            siteListView.setTvDistance( calcDistance(dto.getLng(), dto2.getLng(), dto.getLat(), dto2.getLat()) );
+//            siteListView.setTvDistance( calcDistance(dto.getLng(), dto2.getLng(), dto.getLat(), dto2.getLat()) );
+            siteListView.setTvDistance( calcDistance(dto.lng, dto2.lng, dto.lat, dto2.lat) );
         } else {
             siteListView.setTvDistance(0.0);
         }
 
-        siteListView.setBtnRoadSearchClick(parent.getContext(), dto.getLat(), dto.getLng());
-        siteListView.setBtnMemoClick(parent.getContext(), dto.getSiteid(), dto.getSiteName());
+//        siteListView.setBtnRoadSearchClick(parent.getContext(), dto.getLat(), dto.getLng());
+//        siteListView.setBtnMemoClick(parent.getContext(), dto.getSiteid(), dto.getSiteName());
+        siteListView.setBtnRoadSearchClick(parent.getContext(), dto.lat, dto.lng);
+        siteListView.setBtnMemoClick(parent.getContext(), dto.siteid, dto.siteName);
+
         return siteListView;
     }
 

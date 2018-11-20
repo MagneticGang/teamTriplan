@@ -1,8 +1,11 @@
 package com.hanul.team1.triplan.ysh.dtos;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
-public class PlanListDTO implements Serializable {
+public class PlanListDTO implements Parcelable {
     private String name, placeid, userid, dates;
     private int planid, cntDay, cntSite, totDistance;
 
@@ -16,6 +19,29 @@ public class PlanListDTO implements Serializable {
         this.cntSite = cntSite;
         this.totDistance = totDistance;
     }
+
+    protected PlanListDTO(Parcel in) {
+        name = in.readString();
+        placeid = in.readString();
+        userid = in.readString();
+        dates = in.readString();
+        planid = in.readInt();
+        cntDay = in.readInt();
+        cntSite = in.readInt();
+        totDistance = in.readInt();
+    }
+
+    public static final Creator<PlanListDTO> CREATOR = new Creator<PlanListDTO>() {
+        @Override
+        public PlanListDTO createFromParcel(Parcel in) {
+            return new PlanListDTO(in);
+        }
+
+        @Override
+        public PlanListDTO[] newArray(int size) {
+            return new PlanListDTO[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -79,5 +105,21 @@ public class PlanListDTO implements Serializable {
 
     public void setTotDistance(int totDistance) {
         this.totDistance = totDistance;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(placeid);
+        dest.writeString(userid);
+        dest.writeString(dates);
+        dest.writeInt(planid);
+        dest.writeInt(cntDay);
+        dest.writeInt(cntSite);
+        dest.writeInt(totDistance);
     }
 }

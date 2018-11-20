@@ -16,9 +16,15 @@ import com.hanul.team1.triplan.R;
 import com.hanul.team1.triplan.ysh.dtos.DayListDTO;
 import com.hanul.team1.triplan.ysh.dtos.PlanListDTO;
 import com.hanul.team1.triplan.ysh.listview.DayListAdapter;
-import com.hanul.team1.triplan.ysh.query.DayListSelect;
+import com.hanul.team1.triplan.ysh.retrofit.PlanInterface;
+import com.hanul.team1.triplan.ysh.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DayListActivity extends AppCompatActivity {
 
@@ -41,26 +47,33 @@ public class DayListActivity extends AppCompatActivity {
 
         //받고
         Intent intent = getIntent();
-        PlanListDTO planListDTO = (PlanListDTO) intent.getSerializableExtra("PlanListDTO");
-        //넣고
-        tvPlanName2.setText(planListDTO.getName());
-        tvPlanPeriod2.setText(planListDTO.getDates());
+        PlanListDTO pvo = intent.getParcelableExtra("pvo");
+        tvPlanName2.setText(pvo.getName());
+        tvPlanPeriod2.setText(pvo.getDates());
         GoogleMethods googleMethods = new GoogleMethods(this);
-        googleMethods.getPhotoById(planListDTO.getPlaceid(),imageView2);
-
-        dayListView = findViewById(R.id.dayListView);
-        dtos = new ArrayList<>();
-        adapter = new DayListAdapter(dtos,this);
-        dayListView.setAdapter(adapter);
+        googleMethods.getPhotoById(pvo.getPlaceid(),imageView2);
 
         dialog = new ProgressDialog(this);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage("데이터 로딩 중입니다.");
         dialog.show();
 
-        DayListSelect dayListSelect = new DayListSelect(dtos, adapter, planListDTO.getPlanid(), dialog);
-        dayListSelect.execute();
+        dayListView = findViewById(R.id.dayListView);
+        RetrofitClient.getRetrofit().create(PlanInterface.class).getDayList(pvo.getPlanid()).enqueue(new Callback<List<DayListDTO>>() {
+            @Override
+            public void onResponse(Call<List<DayListDTO>> call, Response<List<DayListDTO>> response) {
+                dtos = (ArrayList<DayListDTO>) response.body();
+                adapter = new DayListAdapter(dtos,getApplicationContext());
+                dayListView.setAdapter(adapter);
 
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<List<DayListDTO>> call, Throwable t) {
+                call.cancel();
+            }
+        });
 
         dayListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

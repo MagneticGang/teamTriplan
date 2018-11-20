@@ -2,6 +2,7 @@ package com.hanul.team1.triplan.ysh;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MotionEvent;
@@ -11,15 +12,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hanul.team1.triplan.R;
-import com.hanul.team1.triplan.ysh.query.MemoSelect;
-import com.hanul.team1.triplan.ysh.query.MemoUpdate;
+import com.hanul.team1.triplan.ysh.dtos.MemoDTO;
+import com.hanul.team1.triplan.ysh.retrofit.PlanInterface;
+import com.hanul.team1.triplan.ysh.retrofit.RetrofitClient;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MemoActivity extends AppCompatActivity {
 
     Button btnMemoClose, btnMemoModify, btnMemoModify_m;
     TextView memoTitle, memoContent, memoContent_m;
     int siteid;
-
+    PlanInterface planInterface = RetrofitClient.getRetrofit().create(PlanInterface.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +45,7 @@ public class MemoActivity extends AppCompatActivity {
         memoTitle = findViewById(R.id.memoTitle);
         memoTitle.setText("'"+siteName+"' 메모");
 
-        new MemoSelect(memoContent, siteid).execute();
+        getMemoQuery();
 
         btnMemoClose = findViewById(R.id.btnMemoClose);
         btnMemoModify = findViewById(R.id.btnMemoModify);
@@ -71,8 +80,17 @@ public class MemoActivity extends AppCompatActivity {
                 if(modify_content.equals(memoContent.getText().toString())){
                     Toast.makeText(MemoActivity.this, "변경 사항이 없습니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    new MemoUpdate(siteid, modify_content, MemoActivity.this).execute();
-                    new MemoSelect(memoContent, siteid).execute();
+                    MemoDTO mdto = new MemoDTO();
+                    modify_content = modify_content.replaceAll("\n", "<br>");
+                    mdto.setContent(modify_content);
+                    mdto.setSiteid(siteid);
+                    updateMemoQuery(mdto);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            getMemoQuery();
+                        }
+                    },500);
                 }
 
                 memoContent.setVisibility(View.VISIBLE);
@@ -93,4 +111,45 @@ public class MemoActivity extends AppCompatActivity {
         return true;
     }
 
+
+    private void getMemoQuery(){
+        planInterface.getMemo(siteid).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String response_memo = response.body().string();
+                    response_memo = response_memo.replaceAll("<br>","\n");
+                    memoContent.setText(response_memo);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                call.cancel();
+            }
+        });
+    }
+
+    private void updateMemoQuery(MemoDTO mdto){
+        planInterface.updateMemo(mdto).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String result = response.body().string();
+                    if(result.equalsIgnoreCase("true")){
+                        Toast.makeText(getApplicationContext(), "변경 완료!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "변경 실패ㅠ", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                call.cancel();
+            }
+        });
+    }
 }

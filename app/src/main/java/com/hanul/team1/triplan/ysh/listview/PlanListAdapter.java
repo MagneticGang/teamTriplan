@@ -16,10 +16,6 @@ public class PlanListAdapter extends BaseAdapter {
         this.dtos = dtos;
         this.context = context;
     }
-    public void addDTO(PlanListDTO dto){
-        dtos.add(dto);
-    }
-
     @Override
     public int getCount() {
         return dtos.size();
