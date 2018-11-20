@@ -4,6 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/dayTvNull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="등록된 일정이 없습니다.
+
+일정을 추가해주세요."
+        android:textColor="#000"
+        android:textSize="25sp"
+        android:visibility="gone"/>
+
+
     <RelativeLayout
         android:id="@+id/dayTop"
         android:layout_width="match_parent"
@@ -103,10 +116,11 @@
             </RelativeLayout>
         </FrameLayout>
 
-        <ListView
-            android:id="@+id/dayListView"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/dayRV"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#dddddd"/>
     </LinearLayout>
 
 

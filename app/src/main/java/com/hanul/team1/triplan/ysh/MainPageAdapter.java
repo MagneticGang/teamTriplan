@@ -39,9 +39,9 @@ public class MainPageAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return "일정";
             case 1:
-                return "기능2";
+                return "지역검색";
             case 2 :
-                return "기능3";
+                return "여행도구";
             case 3:
                 return "My";
             default:
