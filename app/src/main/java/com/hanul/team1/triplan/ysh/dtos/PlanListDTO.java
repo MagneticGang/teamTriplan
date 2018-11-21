@@ -7,9 +7,10 @@ import java.io.Serializable;
 
 public class PlanListDTO implements Serializable {
     private String name, placeid, userid, dates;
-    private int planid, cntDay, cntSite, totDistance;
+    private int planid, cntDay, cntSite;
+    private double totDistance;
 
-    public PlanListDTO(String name, String placeid, String userid, String dates, int planid, int cntDay, int cntSite, int totDistance) {
+    public PlanListDTO(String name, String placeid, String userid, String dates, int planid, int cntDay, int cntSite, double totDistance) {
         this.name = name;
         this.placeid = placeid;
         this.userid = userid;
@@ -19,8 +20,6 @@ public class PlanListDTO implements Serializable {
         this.cntSite = cntSite;
         this.totDistance = totDistance;
     }
-
-
 
     public String getName() {
         return name;
@@ -78,12 +77,11 @@ public class PlanListDTO implements Serializable {
         this.cntSite = cntSite;
     }
 
-    public int getTotDistance() {
+    public double getTotDistance() {
         return totDistance;
     }
 
-    public void setTotDistance(int totDistance) {
+    public void setTotDistance(double totDistance) {
         this.totDistance = totDistance;
     }
-
 }

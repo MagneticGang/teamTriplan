@@ -16,11 +16,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hanul.team1.triplan.R;
+import com.hanul.team1.triplan.ysh.dtos.LatLngSiteVO;
 import com.hanul.team1.triplan.ysh.dtos.PlanListDTO;
 import com.hanul.team1.triplan.ysh.listview.PlanListRecyclerAdapter;
 import com.hanul.team1.triplan.ysh.retrofit.PlanInterface;
 import com.hanul.team1.triplan.ysh.retrofit.RetrofitClient;
+import com.hanul.team1.triplan.ysh.util.Distance;
+import com.hanul.team1.triplan.ysh.util.PlanListAsyncTask;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +40,7 @@ public class PlanListFragment extends Fragment {
     PlanListRecyclerAdapter planListRecyclerAdapter;
     Context context;
     ProgressDialog dialog;
+
 
     @Nullable
     @Override
@@ -57,25 +62,9 @@ public class PlanListFragment extends Fragment {
         SharedPreferences sp = getActivity().getSharedPreferences("userProfile", Activity.MODE_PRIVATE);
         String userid = sp.getString("userid","");
 
-        Call<List<PlanListDTO>> call = RetrofitClient.getRetrofit().create(PlanInterface.class).getPlanList(userid);
-        call.enqueue(new Callback<List<PlanListDTO>>() {
-            @Override
-            public void onResponse(Call<List<PlanListDTO>> call, Response<List<PlanListDTO>> response) {
-                dtos = (ArrayList<PlanListDTO>) response.body();
-                if(dtos.size() == 0){
-                    planTvNull.setVisibility(View.VISIBLE);
-                } else {
-                    planTvNull.setVisibility(View.GONE);
-                    planListRecyclerAdapter = new PlanListRecyclerAdapter(dtos,getContext());
-                    RV.setAdapter(planListRecyclerAdapter);
-                }
-                dialog.dismiss();
-            }
-            @Override
-            public void onFailure(Call<List<PlanListDTO>> call, Throwable t) {
-                call.cancel();
-            }
-        });
+
+        PlanListAsyncTask planListAsyncTask = new PlanListAsyncTask(dtos,userid,planListRecyclerAdapter,RV,getContext(),dialog, planTvNull);
+        planListAsyncTask.execute();
 
         return rootView;
     }

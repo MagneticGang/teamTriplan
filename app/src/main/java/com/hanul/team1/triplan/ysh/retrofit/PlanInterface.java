@@ -1,6 +1,7 @@
 package com.hanul.team1.triplan.ysh.retrofit;
 
 import com.hanul.team1.triplan.ysh.dtos.DayListDTO;
+import com.hanul.team1.triplan.ysh.dtos.LatLngSiteVO;
 import com.hanul.team1.triplan.ysh.dtos.MemoDTO;
 import com.hanul.team1.triplan.ysh.dtos.PlanListDTO;
 import com.hanul.team1.triplan.ysh.dtos.SiteListDTO;
@@ -33,4 +34,7 @@ public interface PlanInterface {
 
     @POST("memoupdate")
     Call<ResponseBody> updateMemo(@Body MemoDTO mdto);
+
+    @GET("latlngQuery")
+    Call<List<LatLngSiteVO>> getLatlngQuery(@Query("planid") int planid);
 }
