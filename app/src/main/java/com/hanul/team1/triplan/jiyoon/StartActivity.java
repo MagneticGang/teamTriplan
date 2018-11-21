@@ -1,19 +1,19 @@
 package com.hanul.team1.triplan.jiyoon;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
+
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +60,7 @@ public class StartActivity extends AppCompatActivity {
     //선언부
     /*ViewPager pager;*/
 
-    SessionCallback callback;
+    private SessionCallback callback;
     SharedPreferences sp;
     Button NLogInBtn;   //일반 로그인 버튼
 
@@ -93,7 +93,7 @@ public class StartActivity extends AppCompatActivity {
 
     //onCreate 시작
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //뷰페이저 넘어가는 시간 3초
@@ -175,16 +175,17 @@ public class StartActivity extends AppCompatActivity {
 
         //카톡 시작
 
-        /**카카오톡 로그아웃 요청**/
+       // 카카오톡 로그아웃 요청
         UserManagement.requestLogout(new LogoutResponseCallback() {
             @Override
             public void onCompleteLogout() {
                 //로그아웃 성공 후 하고싶은 내용 코딩 ~
             }
-        });//카톡 로그아웃 요청 끝
+        });
 
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
+        Session.getCurrentSession().checkAndImplicitOpen();
         //카톡 끝
 
 
@@ -243,13 +244,14 @@ public class StartActivity extends AppCompatActivity {
 
         //간편로그인시 호출 ,없으면 간편로그인시 로그인 성공화면으로 넘어가지 않음
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            return;
+            {
+                return;
+            }
+
         }
-
-        //카톡 로그인 끝
         super.onActivityResult(requestCode, resultCode, data);
+    }
 
-    }//onActivityResult
 
     //onDestroy
     //자원회수.

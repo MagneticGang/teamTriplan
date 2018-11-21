@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="3">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -46,6 +46,25 @@
                 android:layout_marginTop="200dp"
                 android:background="@drawable/button_background"
                 android:text="나침반"
+                android:textColor="@color/com_kakao_account_button_background"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btnNavi"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="200dp"
+                android:background="@drawable/button_background"
+                android:text="카카오\n내비"
                 android:textColor="@color/com_kakao_account_button_background"
                 android:textSize="24sp" />
 

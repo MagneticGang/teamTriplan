@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.hanul.team1.triplan.R;
 import com.hanul.team1.triplan.ggs.CompassActivity;
+import com.hanul.team1.triplan.jiyoon.NaviActivity;
 import com.hanul.team1.triplan.jiyoon.PapagoActivity;
 
 
@@ -19,6 +20,7 @@ public class Fn3Fragment extends Fragment {
 
     Button btnPapago;
     Button btnCompass;
+    Button btnNavi;
 
     @Nullable
     @Override
@@ -49,6 +51,14 @@ public class Fn3Fragment extends Fragment {
         });
         //나침반 버튼 끝
 
+        btnNavi = rootView.findViewById(R.id.btnNavi);
+        btnNavi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent navi = new Intent(getActivity(), NaviActivity.class);
+                startActivity(navi);
+            }
+        });
 
 
         return rootView;
