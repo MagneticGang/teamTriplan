@@ -16,21 +16,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hanul.team1.triplan.R;
-import com.hanul.team1.triplan.ysh.dtos.LatLngSiteVO;
 import com.hanul.team1.triplan.ysh.dtos.PlanListDTO;
 import com.hanul.team1.triplan.ysh.listview.PlanListRecyclerAdapter;
-import com.hanul.team1.triplan.ysh.retrofit.PlanInterface;
-import com.hanul.team1.triplan.ysh.retrofit.RetrofitClient;
-import com.hanul.team1.triplan.ysh.util.Distance;
 import com.hanul.team1.triplan.ysh.util.PlanListAsyncTask;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class PlanListFragment extends Fragment {
 
@@ -40,7 +30,6 @@ public class PlanListFragment extends Fragment {
     PlanListRecyclerAdapter planListRecyclerAdapter;
     Context context;
     ProgressDialog dialog;
-
 
     @Nullable
     @Override
@@ -61,7 +50,6 @@ public class PlanListFragment extends Fragment {
 
         SharedPreferences sp = getActivity().getSharedPreferences("userProfile", Activity.MODE_PRIVATE);
         String userid = sp.getString("userid","");
-
 
         PlanListAsyncTask planListAsyncTask = new PlanListAsyncTask(dtos,userid,planListRecyclerAdapter,RV,getContext(),dialog, planTvNull);
         planListAsyncTask.execute();

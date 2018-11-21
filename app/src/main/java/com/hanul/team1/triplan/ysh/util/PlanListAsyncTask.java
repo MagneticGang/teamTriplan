@@ -66,6 +66,7 @@ public class PlanListAsyncTask extends AsyncTask<Void, Void, Void> {
                 }
             }
         }
+        test();
         return null;
     }
 
@@ -82,5 +83,10 @@ public class PlanListAsyncTask extends AsyncTask<Void, Void, Void> {
         planListRecyclerAdapter = new PlanListRecyclerAdapter(dtos,context);
         RV.setAdapter(planListRecyclerAdapter);
         dialog.dismiss();
+    }
+
+
+    public void test(){
+
     }
 }

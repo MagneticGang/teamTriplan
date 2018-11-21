@@ -70,15 +70,10 @@ public class SiteListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         siteListHolder.btnRoadSearch.setOnClickListener(new customOnClickListener(dto) {
             @Override
             public void onClick(View v) {
-                Uri daumIntentUri = Uri.parse("daummaps://");
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, daumIntentUri);
+                Uri gmmIntentUri = Uri.parse("google.navigation:q="+dto.lat+","+dto.lng+"&mode=b");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
                 context.startActivity(mapIntent);
-
-
-//                Uri gmmIntentUri = Uri.parse("google.navigation:q="+dto.lat+","+dto.lng);
-//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-//                mapIntent.setPackage("com.google.android.apps.maps");
-//                context.startActivity(mapIntent);
             }
         });
         siteListHolder.btnMemo.setOnClickListener(new customOnClickListener(dto) {
