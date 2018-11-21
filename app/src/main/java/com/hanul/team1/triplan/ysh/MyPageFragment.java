@@ -36,6 +36,7 @@ public class MyPageFragment extends Fragment {      //implements Validator.Valid
     Button BtnSuggest, BtnPwdReset, BtnLogout, BtnSignout;
     SharedPreferences sp;
     final public static int REQUESTPOP = 1234;
+    String nickname;
 
     @Nullable
     @Override
@@ -85,6 +86,16 @@ public class MyPageFragment extends Fragment {      //implements Validator.Valid
         return rootView;
     }//onCreateView
 
+    //다시 화면이 호출될 때 이름이 변경되어 있도록!
+    @Override
+    public void onResume() {
+        super.onResume();
+        sp = getActivity().getSharedPreferences("userProfile",Activity.MODE_PRIVATE);
+        nickname = sp.getString("nickname", "로그인 유저 없음!");
+        TVnick.setText(nickname);
+        TVnick.append(" 's\nMy Page");
+    }
+
     //Intent 받는 곳!
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -121,7 +132,12 @@ public class MyPageFragment extends Fragment {      //implements Validator.Valid
             try {
                 Call<ResponseBody> call = calls[0];
                 Response<ResponseBody> res = call.execute();
-                return res.body().string().trim();
+                if(res.isSuccessful()){
+                    return res.body().string().trim();
+                }else{
+                    Log.e(StartActivity.TAG, "네트워킹 실패: "+ res.errorBody().string().trim());
+                    return "";
+                }
             } catch (Exception e) {
                 Log.e(StartActivity.TAG, "네트워킹 실패: "+ e.getLocalizedMessage());
                 Toast.makeText(getActivity(), "서버 응답이 없습니다! 관리자에게 문의하세요!", Toast.LENGTH_SHORT).show();
