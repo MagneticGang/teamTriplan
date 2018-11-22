@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.TextView;
 
@@ -81,6 +82,9 @@ public class PlanListAsyncTask extends AsyncTask<Void, Void, Void> {
         }
 
         planListRecyclerAdapter = new PlanListRecyclerAdapter(dtos,context);
+        ItemTouchHelper.Callback callback = new TouchCallback(planListRecyclerAdapter,context);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(RV);
         RV.setAdapter(planListRecyclerAdapter);
         dialog.dismiss();
     }

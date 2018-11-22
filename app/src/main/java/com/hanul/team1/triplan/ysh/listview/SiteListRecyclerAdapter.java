@@ -16,6 +16,7 @@ import com.hanul.team1.triplan.R;
 import com.hanul.team1.triplan.ysh.GoogleMethods;
 import com.hanul.team1.triplan.ysh.MemoActivity;
 import com.hanul.team1.triplan.ysh.dtos.SiteListDTO;
+import com.hanul.team1.triplan.ysh.util.Distance;
 
 import java.util.ArrayList;
 
@@ -63,7 +64,7 @@ public class SiteListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         siteListHolder.tvSeq.setText(dto.seq+"");
         if(position>0){
             SiteListDTO dto2 = dtos.get(position-1);
-            siteListHolder.tvDistance.setText(calcDistance(dto.lng, dto2.lng, dto.lat, dto2.lat)+"km");
+            siteListHolder.tvDistance.setText(new Distance().calcDistance(dto.lat, dto.lng, dto2.lat, dto2.lng)+"km");
         } else {
             siteListHolder.tvDistance.setText("0km");
         }
@@ -90,26 +91,6 @@ public class SiteListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public int getItemCount() {
         return dtos.size();
-    }
-    private double calcDistance(double x1, double x2, double y1, double y2){
-        double theta, dist;
-        theta = x1 - x2;
-        dist = Math.sin(deg2rad(y1)) * Math.sin(deg2rad(y2)) + Math.cos(deg2rad(y1))
-                * Math.cos(deg2rad(y2)) * Math.cos(deg2rad(theta));
-        dist = Math.acos(dist);
-        dist = rad2deg(dist);
-
-        dist = dist * 60 * 1.1515;
-        dist = dist * 1.609344;    // 단위 mile 에서 km 변환.
-
-        dist = Math.round(dist*100)/100.0;
-        return dist;
-    }
-    private double deg2rad(double deg){
-        return (double)(deg * Math.PI / (double)180d);
-    }
-    private double rad2deg(double rad){
-        return (double)(rad * (double)180d / Math.PI);
     }
 
     public abstract class customOnClickListener implements View.OnClickListener {

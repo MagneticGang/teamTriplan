@@ -9,7 +9,11 @@
         android:id="@+id/planRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#dddddd"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:background="#dddddd" />
 
     <TextView
         android:id="@+id/planTvNull"
@@ -22,5 +26,51 @@
         android:textColor="#000"
         android:textSize="25sp"
         android:visibility="visible"/>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:layout_above="@+id/fab1"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/plus_icon"
+        app:backgroundTint="@android:color/holo_blue_light"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        android:visibility="invisible"
+        />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:layout_above="@+id/fab"
+        android:tooltipText="전체보기"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/plus_icon"
+        app:backgroundTint="@android:color/holo_blue_light"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        android:visibility="invisible"
+        />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/plus_icon"
+        app:backgroundTint="@android:color/holo_blue_light"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        />
 
 </RelativeLayout>

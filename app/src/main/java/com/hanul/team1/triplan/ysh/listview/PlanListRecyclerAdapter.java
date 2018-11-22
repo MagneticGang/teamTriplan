@@ -14,10 +14,35 @@ import com.hanul.team1.triplan.R;
 import com.hanul.team1.triplan.ysh.DayListActivity;
 import com.hanul.team1.triplan.ysh.GoogleMethods;
 import com.hanul.team1.triplan.ysh.dtos.PlanListDTO;
+import com.hanul.team1.triplan.ysh.util.TouchInterface;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class PlanListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PlanListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+    implements TouchInterface {
+
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(dtos, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(dtos, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
+
+        return true;
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        dtos.remove(position);
+        notifyItemRemoved(position);
+    }
 
     public static class PlanListHolder extends RecyclerView.ViewHolder{
         private TextView tvPlanName, tvPlanPeriod, tvCntDestination, tvCntPlace, tvTotDistance;
