@@ -28,36 +28,68 @@
         android:visibility="visible"/>
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        android:layout_above="@+id/fab1"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/plus_icon"
-        app:backgroundTint="@android:color/holo_blue_light"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
-        android:visibility="invisible"
-        />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab1"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        android:layout_above="@+id/fab"
-        android:tooltipText="전체보기"
+    <FrameLayout
+    android:id="@+id/fl2"
+    android:layout_width="130dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_above="@+id/fl1"
+    android:visibility="invisible">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/baseline_done_white_24dp"
+            app:backgroundTint="@android:color/holo_blue_light"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            android:layout_gravity="bottom|right"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="남은 계획"
+            android:textColor="#843939"
+            android:background="#ededed"
+            android:layout_gravity="center|left"
+            android:paddingHorizontal="5dp"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl1"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:src="@drawable/plus_icon"
-        app:backgroundTint="@android:color/holo_blue_light"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
-        android:visibility="invisible"
-        />
+        android:layout_above="@+id/fab"
+        android:visibility="invisible">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/baseline_done_all_white_24dp"
+            app:backgroundTint="@android:color/holo_blue_light"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            android:layout_gravity="bottom|right"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전체 보기"
+            android:textColor="#843939"
+            android:background="#ededed"
+            android:layout_gravity="center|left"
+            android:paddingHorizontal="5dp"/>
+
+    </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

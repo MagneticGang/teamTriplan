@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ import com.hanul.team1.triplan.ysh.util.PlanListAsyncTask;
 
 import java.util.ArrayList;
 
-public class PlanListFragment extends Fragment {
+public class PlanListFragment extends Fragment implements View.OnClickListener {
 
     RecyclerView RV;
     TextView planTvNull;
@@ -38,6 +39,7 @@ public class PlanListFragment extends Fragment {
     FloatingActionButton fab, fab1, fab2;
     Animation fab_open, fab_close;
     Boolean isFabOpen = false;
+    FrameLayout fl1, fl2;
 
     @Nullable
     @Override
@@ -62,8 +64,6 @@ public class PlanListFragment extends Fragment {
         PlanListAsyncTask planListAsyncTask = new PlanListAsyncTask(dtos,userid,planListRecyclerAdapter,RV,getContext(),dialog, planTvNull);
         planListAsyncTask.execute();
 
-
-
         fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
 
@@ -71,49 +71,45 @@ public class PlanListFragment extends Fragment {
         fab1=rootView.findViewById(R.id.fab1);
         fab2=rootView.findViewById(R.id.fab2);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                anim();
-                Toast.makeText(context, "Floating", Toast.LENGTH_SHORT).show();
-            }
-        });
-        fab1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                anim();
-                Toast.makeText(context, "fab1", Toast.LENGTH_SHORT).show();
-            }
-        });
-        fab2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                anim();
-                Toast.makeText(context, "fab2", Toast.LENGTH_SHORT).show();
-            }
-        });
+        fl1 = rootView.findViewById(R.id.fl1);
+        fl2 = rootView.findViewById(R.id.fl2);
 
-
-
+        fab.setOnClickListener(this);
+        fab1.setOnClickListener(this);
+        fab2.setOnClickListener(this);
 
         return rootView;
     }
 
     public void anim(){
         if(isFabOpen){
-            fab1.startAnimation(fab_close);
-            fab2.startAnimation(fab_close);
+            fl1.startAnimation(fab_close);
+            fl2.startAnimation(fab_close);
             fab1.setClickable(false);
             fab2.setClickable(false);
             isFabOpen = false;
         } else {
-            fab1.startAnimation(fab_open);
-            fab2.startAnimation(fab_open);
+            fl1.startAnimation(fab_open);
+            fl2.startAnimation(fab_open);
             fab1.setClickable(true);
             fab2.setClickable(true);
             isFabOpen=true;
         }
     }
 
-
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.fab:
+                anim();
+                break;
+            case R.id.fab1:
+                anim();
+                break;
+            case R.id.fab2:
+                anim();
+                break;
+        }
+    }
 }
