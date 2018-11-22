@@ -3,8 +3,10 @@ package com.hanul.team1.triplan.ysh.util;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,7 +22,7 @@ import java.util.List;
 
 import retrofit2.Call;
 
-public class PlanListAsyncTask extends AsyncTask<Void, Void, Void> {
+public class PlanListAsyncTask extends AsyncTask<Void, Void, ArrayList<PlanListDTO>> {
     ArrayList<PlanListDTO> dtos;
     String userid;
     PlanListRecyclerAdapter planListRecyclerAdapter;
@@ -40,7 +42,7 @@ public class PlanListAsyncTask extends AsyncTask<Void, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected ArrayList<PlanListDTO> doInBackground(Void... voids) {
         double totDist=0.0;
         Distance dist = new Distance();
         Call<List<PlanListDTO>> call = RetrofitClient.getRetrofit().create(PlanInterface.class).getPlanList(userid);
@@ -68,12 +70,12 @@ public class PlanListAsyncTask extends AsyncTask<Void, Void, Void> {
             }
         }
         test();
-        return null;
+        return dtos;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(ArrayList<PlanListDTO> dtos) {
+        super.onPostExecute(dtos);
 
         if(dtos.size() >0 ) {
             planTvNull.setVisibility(View.GONE);
@@ -81,12 +83,19 @@ public class PlanListAsyncTask extends AsyncTask<Void, Void, Void> {
             planTvNull.setVisibility(View.VISIBLE);
         }
 
-        planListRecyclerAdapter = new PlanListRecyclerAdapter(dtos,context);
+        planListRecyclerAdapter.setDtos(dtos);
+        planListRecyclerAdapter.notifyDataSetChanged();
         ItemTouchHelper.Callback callback = new TouchCallback(planListRecyclerAdapter,context);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(RV);
         RV.setAdapter(planListRecyclerAdapter);
-        dialog.dismiss();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 2000);
     }
 
 

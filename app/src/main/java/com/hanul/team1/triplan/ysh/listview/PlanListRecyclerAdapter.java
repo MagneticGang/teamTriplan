@@ -38,6 +38,7 @@ public class PlanListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         return true;
     }
 
+
     @Override
     public void onItemDismiss(int position) {
         dtos.remove(position);
@@ -64,6 +65,10 @@ public class PlanListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     public PlanListRecyclerAdapter(ArrayList<PlanListDTO> dtos, Context context) {
         this.dtos = dtos;
         this.context=context;
+    }
+
+    public void setDtos(ArrayList<PlanListDTO> dtos){
+        this.dtos = dtos;
     }
 
     @NonNull

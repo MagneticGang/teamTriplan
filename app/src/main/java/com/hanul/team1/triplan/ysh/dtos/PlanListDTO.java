@@ -1,16 +1,16 @@
 package com.hanul.team1.triplan.ysh.dtos;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.io.Serializable;
+import java.sql.Date;
 
 public class PlanListDTO implements Serializable {
     private String name, placeid, userid, dates;
-    private int planid, cntDay, cntSite;
+    private int planid, cntDay, cntSite, days;
     private double totDistance;
+    private java.sql.Date startdate;
 
-    public PlanListDTO(String name, String placeid, String userid, String dates, int planid, int cntDay, int cntSite, double totDistance) {
+
+    public PlanListDTO(String name, String placeid, String userid, String dates, int planid, int cntDay, int cntSite, double totDistance, Date startdate, int days) {
         this.name = name;
         this.placeid = placeid;
         this.userid = userid;
@@ -19,8 +19,24 @@ public class PlanListDTO implements Serializable {
         this.cntDay = cntDay;
         this.cntSite = cntSite;
         this.totDistance = totDistance;
+        this.startdate = startdate;
+        this.days = days;
     }
 
+    public int getDays() {
+        return days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
+    }
+
+    public java.sql.Date getStartdate() {
+        return startdate;
+    }
+    public void setStartdate(java.sql.Date startdate) {
+        this.startdate = startdate;
+    }
     public String getName() {
         return name;
     }
