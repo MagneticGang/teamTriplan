@@ -3,14 +3,23 @@ package com.hanul.team1.triplan.ysh;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBufferResponse;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.hanul.team1.triplan.R;
 import com.hanul.team1.triplan.ysh.dtos.DayListDTO;
 import com.hanul.team1.triplan.ysh.dtos.SiteListDTO;
@@ -33,7 +42,9 @@ public class SiteListActivity extends AppCompatActivity {
 
     SiteListRecyclerAdapter mAdapter;
     ArrayList<SiteListDTO> dtos;
+    DayListDTO dayDto;
     ProgressDialog dialog;
+    LatLng latLng;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +52,7 @@ public class SiteListActivity extends AppCompatActivity {
         setContentView(R.layout.sh_activity_site_list);
 
         Intent intent = getIntent();
-        DayListDTO dayDto = (DayListDTO) intent.getSerializableExtra("dayDto");
+        dayDto = (DayListDTO) intent.getSerializableExtra("dayDto");
 
         siteTvNull = findViewById(R.id.siteTvNull);
         siteHeader = findViewById(R.id.siteHeader);
@@ -80,11 +91,29 @@ public class SiteListActivity extends AppCompatActivity {
         btnMap = findViewById(R.id.btnMap);
         btnSiteBack = findViewById(R.id.btnSiteBack);
 
+
+        GeoDataClient mGeoDataClient = Places.getGeoDataClient(this);
+        mGeoDataClient.getPlaceById(dayDto.getPlaceid()).addOnCompleteListener(new OnCompleteListener<PlaceBufferResponse>() {
+            @Override
+            public void onComplete(@NonNull Task<PlaceBufferResponse> task) {
+                if(task.isSuccessful()){
+                    PlaceBufferResponse places = task.getResult();
+                    Place place = places.get(0);
+                    latLng = place.getLatLng();
+                    places.release();
+                } else {
+                    Log.d("yangbob", "place not found");
+                }
+            }
+        });
+
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent(getApplicationContext(), MapActivity.class);
                 intent2.putExtra("dtos", dtos);
+                intent2.putExtra("lat", new Double(latLng.latitude));
+                intent2.putExtra("lng",new Double(latLng.longitude));
                 startActivity(intent2);
             }
         });

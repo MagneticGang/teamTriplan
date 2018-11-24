@@ -24,11 +24,16 @@ import android.widget.TextView;
 import com.hanul.team1.triplan.R;
 import com.hanul.team1.triplan.ysh.dtos.PlanListDTO;
 import com.hanul.team1.triplan.ysh.listview.PlanListRecyclerAdapter;
+import com.hanul.team1.triplan.ysh.objectbox.App;
 import com.hanul.team1.triplan.ysh.util.PlanListAsyncTask;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
+
+import io.objectbox.BoxStore;
 
 public class PlanListFragment extends Fragment implements View.OnClickListener {
 
@@ -44,6 +49,9 @@ public class PlanListFragment extends Fragment implements View.OnClickListener {
     Boolean isFabOpen = false;
     FrameLayout fl1, fl2, fl3;
     ArrayList<PlanListDTO> dtos_remain = new ArrayList<>();
+
+    Activity activity;
+
 
     @Nullable
     @Override
@@ -65,9 +73,11 @@ public class PlanListFragment extends Fragment implements View.OnClickListener {
         SharedPreferences sp = getActivity().getSharedPreferences("userProfile", Activity.MODE_PRIVATE);
         String userid = sp.getString("userid","");
 
-        planListRecyclerAdapter = new PlanListRecyclerAdapter(dtos,getContext());
+        activity = getActivity();
 
-        PlanListAsyncTask planListAsyncTask = new PlanListAsyncTask(dtos,userid,planListRecyclerAdapter,RV,getContext(),dialog, planTvNull);
+        planListRecyclerAdapter = new PlanListRecyclerAdapter(dtos,getContext(),activity);
+
+        PlanListAsyncTask planListAsyncTask = new PlanListAsyncTask(dtos,userid,planListRecyclerAdapter,RV,getContext(),dialog, planTvNull,activity);
         try {
             dtos = planListAsyncTask.execute().get();
         } catch (InterruptedException e) {
@@ -119,7 +129,17 @@ public class PlanListFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        java.sql.Date date = new java.sql.Date(new Date().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String ss = sdf.format(new Date());
+        Date date = null;
+        try {
+            date = sdf.parse(ss);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Log.d("yangbob","오류냐 설마");
+        }
+        java.sql.Date date2 = new java.sql.Date(date.getTime());
+
         switch (id){
             case R.id.fab:
                 anim();
@@ -141,7 +161,7 @@ public class PlanListFragment extends Fragment implements View.OnClickListener {
                 anim();
                 dtos_remain.clear();
                 for(PlanListDTO vo : dtos){
-                    if(date.compareTo(new Date(vo.getStartdate().getTime()+(1000*60*60*24*(vo.getDays()-1))))<=0){
+                    if(date2.compareTo(new Date(vo.getStartdate().getTime()+(1000*60*60*24*(vo.getDays()-1))))<=0){
                         dtos_remain.add(vo);
                     }
                 }
@@ -159,7 +179,7 @@ public class PlanListFragment extends Fragment implements View.OnClickListener {
                 anim();
                 dtos_remain.clear();
                 for(PlanListDTO vo : dtos){
-                    if(date.compareTo(new Date(vo.getStartdate().getTime()+(1000*60*60*24*(vo.getDays()-1))))<=0&&date.compareTo(vo.getStartdate())>=0){
+                    if(date2.compareTo(new Date(vo.getStartdate().getTime()+(1000*60*60*24*(vo.getDays()-1))))<=0&&date2.compareTo(vo.getStartdate())>=0){
                         dtos_remain.add(vo);
                     }
                 }

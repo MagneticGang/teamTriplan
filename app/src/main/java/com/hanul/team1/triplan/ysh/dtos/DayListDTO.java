@@ -6,10 +6,10 @@ import android.os.Parcelable;
 import java.io.Serializable;
 
 public class DayListDTO implements Serializable {
-    String dates, days, destName;
+    String dates, days, destName, placeid;
     int cntSite, dayid, day, planid;
 
-    public DayListDTO(String dates, String days, String destName, int cntSite, int dayid, int day, int planid) {
+    public DayListDTO(String dates, String days, String destName, int cntSite, int dayid, int day, int planid, String placeid) {
         this.dates = dates;
         this.days = days;
         this.destName = destName;
@@ -17,6 +17,15 @@ public class DayListDTO implements Serializable {
         this.dayid = dayid;
         this.day = day;
         this.planid = planid;
+        this.placeid = placeid;
+    }
+
+    public String getPlaceid() {
+        return placeid;
+    }
+
+    public void setPlaceid(String placeid) {
+        this.placeid = placeid;
     }
 
     public int getPlanid() {

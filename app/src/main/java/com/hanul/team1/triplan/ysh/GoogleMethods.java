@@ -3,14 +3,19 @@ package com.hanul.team1.triplan.ysh;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBufferResponse;
 import com.google.android.gms.location.places.PlaceDetectionClient;
+import com.google.android.gms.location.places.PlaceLikelihoodBufferResponse;
 import com.google.android.gms.location.places.PlacePhotoMetadata;
 import com.google.android.gms.location.places.PlacePhotoMetadataBuffer;
 import com.google.android.gms.location.places.PlacePhotoMetadataResponse;
 import com.google.android.gms.location.places.PlacePhotoResponse;
+import com.google.android.gms.location.places.PlaceReport;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,8 +26,8 @@ public class GoogleMethods {
     public PlaceDetectionClient mPlaceDetectionClient;
 
     public GoogleMethods(Context context){
-        mGeoDataClient = Places.getGeoDataClient(context,null);
-        mPlaceDetectionClient = Places.getPlaceDetectionClient(context,null);
+        mGeoDataClient = Places.getGeoDataClient(context);
+        mPlaceDetectionClient = Places.getPlaceDetectionClient(context);
     }
 
     public void getPhotoById(String placeId, final ImageView imageView){
@@ -56,4 +61,4 @@ public class GoogleMethods {
             }
         });
     }
-}
+ }

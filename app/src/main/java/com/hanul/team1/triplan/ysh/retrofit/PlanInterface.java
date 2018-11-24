@@ -37,4 +37,7 @@ public interface PlanInterface {
 
     @GET("latlngQuery")
     Call<List<LatLngSiteVO>> getLatlngQuery(@Query("planid") int planid);
+
+    @GET("planDelete")
+    Call<ResponseBody> deletePlan(@Query("planid") int planid);
 }

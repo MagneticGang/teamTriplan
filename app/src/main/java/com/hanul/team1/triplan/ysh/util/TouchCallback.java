@@ -1,23 +1,24 @@
 package com.hanul.team1.triplan.ysh.util;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.hanul.team1.triplan.R;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
+
 public class TouchCallback extends ItemTouchHelper.Callback {
 
     private final TouchInterface mAdapter;
     Context context;
+    private boolean swipeBack = false;
 
     public TouchCallback(TouchInterface mAdapter, Context context) {
         this.mAdapter = mAdapter;
@@ -53,8 +54,18 @@ public class TouchCallback extends ItemTouchHelper.Callback {
     }
 
     @Override
-    public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+    public int convertToAbsoluteDirection(int flags, int layoutDirection) {
 
+        if (swipeBack) {
+            swipeBack = false;
+            return 0;
+        }
+
+        return super.convertToAbsoluteDirection(flags, layoutDirection);
+    }
+
+    @Override
+    public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         new RecyclerViewSwipeDecorator.Builder(context,c,recyclerView,viewHolder,dX,dY,actionState,isCurrentlyActive)
                 .addBackgroundColor(Color.RED)
                 .addActionIcon(R.drawable.baseline_delete_outline_white_24dp)

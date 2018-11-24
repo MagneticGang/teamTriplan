@@ -4,6 +4,7 @@ package com.hanul.team1.triplan.jiyoon;
 import android.app.Application;
 import android.content.Context;
 
+import com.hanul.team1.triplan.ysh.objectbox.App;
 import com.kakao.auth.ApprovalType;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.IApplicationConfig;
@@ -11,7 +12,7 @@ import com.kakao.auth.ISessionConfig;
 import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
 
-public class GlobalApplication extends Application {
+public class GlobalApplication extends App {
 
     private  class KakaoSDKAdapter extends KakaoAdapter{
 
