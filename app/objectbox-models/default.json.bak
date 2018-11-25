@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "2:2433977547666736409",
-      "lastPropertyId": "3:5765422152493756922",
+      "lastPropertyId": "4:7910488147479859699",
       "name": "PlanListEntity",
       "properties": [
         {
@@ -15,6 +15,10 @@
         {
           "id": "2:711174491589579906",
           "name": "planid"
+        },
+        {
+          "id": "4:7910488147479859699",
+          "name": "seq"
         }
       ],
       "relations": []

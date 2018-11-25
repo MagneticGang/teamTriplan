@@ -17,6 +17,7 @@ import com.hanul.team1.triplan.ysh.listview.PlanListRecyclerAdapter;
 import com.hanul.team1.triplan.ysh.objectbox.App;
 import com.hanul.team1.triplan.ysh.objectbox.PlanListEntity;
 import com.hanul.team1.triplan.ysh.objectbox.PlanListEntity_;
+import com.hanul.team1.triplan.ysh.objectbox.UserEntity;
 import com.hanul.team1.triplan.ysh.retrofit.PlanInterface;
 import com.hanul.team1.triplan.ysh.retrofit.RetrofitClient;
 
@@ -40,7 +41,9 @@ public class PlanListAsyncTask extends AsyncTask<Void, Void, ArrayList<PlanListD
     Activity activity;
 
     private Box<PlanListEntity> plansBox;
+    private Box<UserEntity> userBox;
     private List<PlanListEntity> box_planList;
+    private List<UserEntity> box_user;
     private int maxSeq;
 
     public PlanListAsyncTask(ArrayList<PlanListDTO> dtos, String userid, PlanListRecyclerAdapter planListRecyclerAdapter, RecyclerView RV, Context context, ProgressDialog dialog, TextView planTvNull, Activity activity) {
@@ -86,21 +89,37 @@ public class PlanListAsyncTask extends AsyncTask<Void, Void, ArrayList<PlanListD
         BoxStore boxStore = ((App)activity.getApplication()).getBoxStore();
 
         plansBox = boxStore.boxFor(PlanListEntity.class);
+        userBox = boxStore.boxFor(UserEntity.class);
         //plansBox.removeAll();
         box_planList = plansBox.query().order(PlanListEntity_.seq).build().find();
+        box_user = userBox.query().build().find();
+        if(box_user.size()==0){
+            UserEntity user_vo = new UserEntity(0, userid);
+            userBox.put(user_vo);
+        } else {
+            UserEntity user_vo = box_user.get(0);
+            if(!user_vo.getUserid().equals(userid)){
+                plansBox.removeAll();
+                userBox.removeAll();
+                UserEntity user_vo2 = new UserEntity(0, userid);
+                userBox.put(user_vo2);
+            }
+        }
         syncToDB(dtos);
 
         for(PlanListEntity e :box_planList){
             Log.d("yangbob","id="+e.id+" // planid="+e.getPlanid() + " // seq="+e.getSeq() );
         }
 
-        ArrayList<PlanListDTO> dtos2 = new ArrayList<>();
-        dtos2.addAll(dtos);
-        for(int i=0; i<dtos.size(); i++){
-            int seq = plansBox.query().equal(PlanListEntity_.planid,dtos.get(i).getPlanid()).build().find().get(0).getSeq();
-            dtos2.set(dtos.size()-seq, dtos.get(i));
+        if(dtos.size()>0){
+            ArrayList<PlanListDTO> dtos2 = new ArrayList<>();
+            dtos2.addAll(dtos);
+            for(int i=0; i<dtos.size(); i++){
+                int seq = plansBox.query().equal(PlanListEntity_.planid,dtos.get(i).getPlanid()).build().find().get(0).getSeq();
+                dtos2.set(dtos.size()-seq, dtos.get(i));
+            }
+            dtos=dtos2;
         }
-        dtos=dtos2;
 
         return dtos;
     }
@@ -151,17 +170,21 @@ public class PlanListAsyncTask extends AsyncTask<Void, Void, ArrayList<PlanListD
         box_planList = plansBox.query().order(PlanListEntity_.seq).build().find();
     }
     private void addAfterChk(ArrayList<PlanListDTO> dtos){
-        ArrayList<Integer> planids = new ArrayList<>();
-        for(PlanListEntity e : box_planList){
-            planids.add(e.getPlanid());
-        }
-
-        for(int i=0; i<dtos.size(); i++){
-            if(!planids.contains(dtos.get(i).getPlanid())){
-                maxSeq = plansBox.query().orderDesc(PlanListEntity_.seq).build().find().get(0).getSeq();
-                PlanListEntity box_vo = new PlanListEntity(maxSeq+1, dtos.get(i).getPlanid(),maxSeq+1);
-                plansBox.put(box_vo);
+        if(box_planList.size()>0){
+            ArrayList<Integer> planids = new ArrayList<>();
+            for(PlanListEntity e : box_planList){
+                planids.add(e.getPlanid());
             }
+
+            for(int i=0; i<dtos.size(); i++){
+                if(!planids.contains(dtos.get(i).getPlanid())){
+                    maxSeq = plansBox.query().orderDesc(PlanListEntity_.seq).build().find().get(0).getSeq();
+                    PlanListEntity box_vo = new PlanListEntity(maxSeq+1, dtos.get(i).getPlanid(),maxSeq+1);
+                    plansBox.put(box_vo);
+                }
+            }
+        } else {
+            addAll(dtos);
         }
 
         box_planList = plansBox.query().order(PlanListEntity_.seq).build().find();
