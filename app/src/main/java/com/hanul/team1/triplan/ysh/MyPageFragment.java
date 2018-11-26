@@ -23,6 +23,8 @@ import com.hanul.team1.triplan.R;
 import com.hanul.team1.triplan.ggs.ggs_InfoReset;
 import com.hanul.team1.triplan.ggs.retrofit.GNUserClient;
 import com.hanul.team1.triplan.jiyoon.StartActivity;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -105,15 +107,24 @@ public class MyPageFragment extends Fragment {      //implements Validator.Valid
         //정보수정화면이 꺼지면 fragment를 새로고침한다!
         if(requestCode==REQUESTPOP){
            FragmentTransaction ft = getFragmentManager().beginTransaction();
-           ft.detach(this).attach(this).commit();//땟다가 다시 붙여서 새로고침 효과?
+           ft.detach(this).attach(this).commitAllowingStateLoss();//땟다가 다시 붙여서 새로고침 효과?
 
         }
     }
 
     //로그인 화면으로 이동
     private void goStart(){
+
+        //카톡 로그인 유저 로그아웃 시키기
+        UserManagement.requestLogout(new LogoutResponseCallback() {
+            @Override
+            public void onCompleteLogout() {
+                //로그아웃 성공 후 하고싶은 내용 코딩 ~
+            }
+        });
+
         Intent intent = new Intent(getActivity(), StartActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

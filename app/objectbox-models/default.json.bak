@@ -22,9 +22,25 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "3:8677414472085483031",
+      "lastPropertyId": "2:8516010094310207555",
+      "name": "UserEntity",
+      "properties": [
+        {
+          "id": "1:8695037465710027078",
+          "name": "id"
+        },
+        {
+          "id": "2:8516010094310207555",
+          "name": "userid"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "2:2433977547666736409",
+  "lastEntityId": "3:8677414472085483031",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
